@@ -5,27 +5,29 @@
 > l3tsg01337
 
 ### Features
-1. #### SQL Injection
--Login
-Cookie Editing for authentication
+#### SQL Injection
+- Login
 
-1. #### XSS Mitigation
--File sharing comments
+#### Session/Cookie Encryption
+- Prevents easy change of cookie for session hijacking
+
+#### XSS Mitigation
+- File sharing comments
 
 #### XXE Prevention
--Document loading
+- Document loading
 
 #### Arbitary File Upload Prevemtion(File MIME check)
--File upload
+- File upload
 
 #### Local File Inclusion/Traversal Prevention
--File viewing
+- File viewing
 
 #### Sensitive Data Exposure
--Password manager and credit card details for purchase of more storage
+- Password manager and credit card details for purchase of more storage
 
 #### Access Control
--Roles for shared folders
+- Roles for shared folders
 
 #### Logging
--File access logs
+- File access logs
