@@ -1,7 +1,7 @@
 # __Application Security Project__
 ## Declan File Manager
 ### SQL Server:
-> root@localhost
+> root@localhost\
 > l3tsg01337
 
 ### Features
