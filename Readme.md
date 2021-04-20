@@ -5,11 +5,11 @@
 > l3tsg01337
 
 ### Features
-#### SQL Injection
+1. #### SQL Injection
 -Login
 Cookie Editing for authentication
 
-#### XSS Mitigation
+1. #### XSS Mitigation
 -File sharing comments
 
 #### XXE Prevention
@@ -28,3 +28,4 @@ Cookie Editing for authentication
 -Roles for shared folders
 
 #### Logging
+-File access logs
