@@ -1,14 +1,14 @@
-# __Application Security Project__
+# __Application Security Project__ :closed_lock_with_key:
 ## Declan File Manager :briefcase:
 ### SQL Server:
 > root@localhost\
 > l3tsg01337
 
 ### Features
-#### 1. SQL Injection
+#### 1. SQL Injection :syringe:
 - Login
 
-#### 2. Session/Cookie Encryption
+#### 2. Session/Cookie Encryption :cookie:
 - Prevents easy change of cookie for session hijacking
 
 #### 3. XSS Mitigation
