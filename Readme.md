@@ -5,7 +5,7 @@
 > l3tsg01337
 
 ### Features
-#### 1. [ ] SQL Injection
+#### 1. [x] SQL Injection
 - Login
 
 #### 2. [ ] Session/Cookie Encryption
