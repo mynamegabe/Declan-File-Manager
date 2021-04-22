@@ -1,5 +1,4 @@
 <?php
-
 function sqlConnect()
  {
  $dbhost = "localhost";
