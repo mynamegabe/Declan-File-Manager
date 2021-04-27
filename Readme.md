@@ -1,11 +1,11 @@
-# __Application Security Project__ :closed_lock_with_key:
-## Declan File Manager :briefcase:
+# __Declan File Manager__ :briefcase:
+## Used to be an Application Security Project but now just a cool side project :briefcase:
 ### SQL Server:
 > root@localhost\
 > l3tsg01337
 
 ### Features
-#### 1. SQL Injection :syringe:
+#### 1. SQL Injection Prevention :syringe:
 - Login
 
 #### 2. Session/Cookie Encryption :cookie:
@@ -17,7 +17,7 @@
 #### 4. XXE Prevention
 - Document loading
 
-#### 5. Arbitary File Upload Prevemtion(File MIME check)
+#### 5. Arbitary File Upload Prevention(File MIME check)
 - File upload
 
 #### 6. Local File Inclusion/Traversal Prevention
