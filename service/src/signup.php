@@ -18,11 +18,14 @@ if (1==1) {
     $id = generateRandomString();
     $conn = sqlConnect();
 
-    error_reporting(E_ALL);
+    /*error_reporting(E_ALL);
     ini_set('display_errors', 1);
+    */
 
     $sql = $conn->prepare("INSERT INTO users (userid, firstname, lastname, email, password) VALUES (?, ?, ?, ?, ?)");
-    echo $conn->error;
+
+    /*echo $conn->error;*/
+
     $sql->bind_param('sssss', $id, $firstname, $lastname, $email, $password);
     if ($sql->execute() === TRUE) {
         header("Location: ./home.php");

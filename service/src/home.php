@@ -31,12 +31,44 @@ include 'db_connection.php';
   </div>
   <div id="main-body">
     <div id="side-navbar">
+      <div id="add-button-div">
+        <button type="button" onclick="addPopup()" id="add-button"><img src="/static/images/icons/add.png"/></button>
+        <div id="add-dropdown">
+          <button type="button" onclick="addFile()"><img src="/static/images/icons/document.png"/></button>
+          <button type="button" onclick="addFolder()"><img src="/static/images/icons/folder.png"/></button>
+        </div>
+      </div>
       <a href="/home.php"><img src="/static/images/icons/binder.png"/></a>
       <a href="/home.php"><img src="/static/images/icons/favourite.png"/></a>
       <a href="/home.php"><img src="/static/images/icons/trash-bin.png"/></a>
     </div>
     <div id="content">
 
+    </div>
+
+    <div id="folder-popup">
+      <div>
+        <button type="button" id="folder-close" onclick="addFolderClose()">X</button>
+        <div id="folder-popup-div">
+          <h3>New Folder</h3>
+          <form action="addfolder.php" method="POST">
+            <input type="text" name="foldername" placeholder="Folder Name" id="foldername"/>
+            <input type="submit" name="submit" value="Add Folder" class="submit"/>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="file-popup">
+      <div>
+        <button type="button" id="file-close" onclick="addFileClose()">X</button>
+        <div id="file-popup-div">
+          <h3>Upload File</h3>
+          <form action="addfile.php" method="POST">
+            <input type="file" name="file" id="file-upload"/>
+            <input type="submit" name="submit" value="Upload" class="submit"/>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </body>

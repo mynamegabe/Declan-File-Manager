@@ -40,3 +40,30 @@ function rushopen() {
   $("#full-form").css('height','780px');
   checkHeight()
 }
+
+function addPopup() {
+  $("#add-button-div").css("width","200px")
+  $("#add-button-div").css("background-color","#fff8e3")
+  $("#add-button").attr("onclick","addPopupClose()")
+}
+function addPopupClose() {
+  $("#add-button-div").css("width","60px")
+  $("#add-button-div").css("background-color","#fffffc")
+  $("#add-button").attr("onclick","addPopup()")
+}
+
+function addFolder() {
+  $("#folder-popup").css("display","block")
+}
+
+function addFolderClose() {
+  $("#folder-popup").css("display","none")
+}
+
+function addFile() {
+  $("#file-popup").css("display","block")
+}
+
+function addFileClose() {
+  $("#file-popup").css("display","none")
+}
