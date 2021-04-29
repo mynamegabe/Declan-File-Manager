@@ -16,8 +16,14 @@ if (isMobile == true) {
   });
 }
 
-if (window.innerHeight < 1322) {
-  var newheight = String((window.innerHeight - $(".center").height())/2) + "px"
-  $(".center").css("padding-top",newheight)
-  console.log(window.innerHeight < 1322);
+function checkHeight() {
+  if (window.innerHeight < 1322) {
+    var newheight = String((window.innerHeight - $(".center").height())/2) + "px"
+    $(".center").css("padding-top",newheight)
+    console.log(String((window.innerHeight - $(".center").height())/6) + "px");
+  }
 }
+
+$("#search-button").click(function() {
+  $("#search-form").submit();
+})

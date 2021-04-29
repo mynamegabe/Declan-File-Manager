@@ -7,7 +7,12 @@ if (1==1) {
 
     $conn = sqlConnect();
 
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
     $sql = $conn->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
+    echo $conn->error;
+    
     $sql->bind_param('ss', $email, $password);
     $sql->execute();
 

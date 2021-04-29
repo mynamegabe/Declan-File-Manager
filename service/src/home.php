@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_COOKIE["user"])) {
+if(isset($_SESSION["userId"])) {
   //
 } else {
   $_SESSION["error"] = "Not logged in! D:";
@@ -21,6 +21,23 @@ include 'db_connection.php';
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+  <div id="navbar">
+    <img src="static/images/logo_transparent.png" id="mini-logo"/>
+    <form method="POST" action="search.php" id="search-form">
+      <input type="text" id="search-bar" name="searchquery" placeholder="Files, folders, etc"/>
+      <img src="static/images/icons/search2.png" id="search-button"/>
+    </form>
+    <img src="static/images/icons/user.png" id="profile-logo"/>
+  </div>
+  <div id="main-body">
+    <div id="side-navbar">
+      <a href="/home.php"><img src="/static/images/icons/binder.png"/></a>
+      <a href="/home.php"><img src="/static/images/icons/favourite.png"/></a>
+      <a href="/home.php"><img src="/static/images/icons/trash-bin.png"/></a>
+    </div>
+    <div id="content">
 
+    </div>
+  </div>
 </body>
 </html>

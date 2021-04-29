@@ -1,21 +1,10 @@
 <?php
 session_start();
-function generateRandomString($length = 20) {
-  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  $charactersLength = strlen($characters);
-  $randomString = '';
-  for ($i = 0; $i < $length; $i++) {
-      $randomString .= $characters[rand(0, $charactersLength - 1)];
-  }
-  return $randomString;
-}
 
-if(isset($_COOKIE["user"])) {
-  //
+if(isset($_SESSION["userId"])) {
+  header("Location: ./home.php");
 } else {
-  $userid = generateRandomString();
-  setcookie("user", $userid, time() + (86400 * 30), "/");
-  mkdir('files/' . $userid, 0777, true);
+  //
 }
 
 include 'db_connection.php';
@@ -30,7 +19,7 @@ include 'db_connection.php';
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body onload="open()">
+<body>
   <div class="center">
     <img src="static/images/logo_transparent.png" id="main-logo"/>
     <h1 id="title">The simplified and secure file manager</h1>
@@ -93,7 +82,16 @@ include 'db_connection.php';
         </div>
     </div>
   </div>
-
+</body>
+</html>
+<?php
+if(isset($_COOKIE["visited"])) {
+  echo "<script>rushopen()</script>";
+} else {
+  echo "<script>open()</script>";
+  setcookie("visited", "True", time() + (86400 * 30), "/");
+}
+?>
 
 
 
