@@ -27,3 +27,9 @@ function checkHeight() {
 $("#search-button").click(function() {
   $("#search-form").submit();
 })
+
+$(".folder").click(function() {
+  document.getElementById("get-directory").value=$(this).text()
+  console.log($(this).innerText)
+  $("#file-form").submit();
+})

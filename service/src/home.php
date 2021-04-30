@@ -2,7 +2,28 @@
 session_start();
 
 if(isset($_SESSION["userId"])) {
-  //
+
+  $userid = $_SESSION["userId"];
+  $method = $_SERVER['REQUEST_METHOD'];
+  if ($method === 'GET') {
+    $target_folder = 'files/' . $_SESSION["userId"];
+  } elseif ($method === "POST") {
+    $target_folder = 'files/' . $_SESSION["userId"] . "/" . $_POST["directory"];
+  }
+  $all = scandir($target_folder);
+  $folders = array();
+  $files = array();
+
+  foreach($all as $file) {
+    if (!($file == "." || $file == "..")) {
+      if (is_dir($target_folder . "/" . $file)) {
+        array_push($folders,$file);
+      } else {
+        array_push($files,$file);
+      }
+    }
+  }
+
 } else {
   $_SESSION["error"] = "Not logged in! D:";
   header("Location: ./index.php");
@@ -43,7 +64,29 @@ include 'db_connection.php';
       <a href="/home.php"><img src="/static/images/icons/trash-bin.png"/></a>
     </div>
     <div id="content">
-
+      <?php
+      if (isset($_POST["directory"])) {
+        echo "<h1 id='dir'>" . $_POST["directory"] . "</h1>";
+      } else {
+        echo "<h1 id='dir'>" . "/" . "</h1>";
+      }
+      ?>
+      <h1>Folders</h1>
+      <div id="folders">
+        <?php
+        foreach($folders as $folder) {
+          echo "<div class='folder'>" . $folder . "</div>";
+        }
+        ?>
+      </div>
+      <h1>Files</h1>
+      <div id="files">
+        <?php
+        foreach($files as $folder) {
+          echo "<div class='file'>" . $file . "</div>";
+        }
+        ?>
+      </div>
     </div>
 
     <div id="folder-popup">
@@ -70,6 +113,12 @@ include 'db_connection.php';
         </div>
       </div>
     </div>
+    <form method="POST" action="" id="file-form">
+      <input type="text" name="directory" id="get-directory"/>
+    </form>
   </div>
 </body>
+<footer>
+  <script type="text/javascript" src="static/js/script.js"></script>
+</footer>
 </html>
