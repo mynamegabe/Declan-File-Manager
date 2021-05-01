@@ -17,16 +17,16 @@ if (1==1) {
     $password = hash('sha256', filter_var($_POST["password"], FILTER_SANITIZE_STRING));
     $id = generateRandomString();
     $conn = sqlConnect();
-
+    $db_id = "files" . strval(rand(1,5));
     /*error_reporting(E_ALL);
     ini_set('display_errors', 1);
     */
 
-    $sql = $conn->prepare("INSERT INTO users (userid, firstname, lastname, email, password) VALUES (?, ?, ?, ?, ?)");
+    $sql = $conn->prepare("INSERT INTO users (userid, firstname, lastname, email, password, db) VALUES (?, ?, ?, ?, ?, ?)");
 
     /*echo $conn->error;*/
 
-    $sql->bind_param('sssss', $id, $firstname, $lastname, $email, $password);
+    $sql->bind_param('ssssss', $id, $firstname, $lastname, $email, $password, $db_id);
     if ($sql->execute() === TRUE) {
         header("Location: ./home.php");
         $_SESSION["success"] = "Registered!";

@@ -8,7 +8,7 @@ if(isset($_SESSION["userId"])) {
   if ($method === 'GET') {
     $target_folder = 'files/' . $_SESSION["userId"];
   } elseif ($method === "POST") {
-    $target_folder = 'files/' . $_SESSION["userId"] . "/" . $_POST["directory"];
+    $target_folder = 'files/' . $_SESSION["userId"] . $_POST["directory"];
   }
   $all = scandir($target_folder);
   $folders = array();
@@ -82,7 +82,7 @@ include 'db_connection.php';
       <h1>Files</h1>
       <div id="files">
         <?php
-        foreach($files as $folder) {
+        foreach($files as $file) {
           echo "<div class='file'>" . $file . "</div>";
         }
         ?>
@@ -106,15 +106,16 @@ include 'db_connection.php';
         <button type="button" id="file-close" onclick="addFileClose()">X</button>
         <div id="file-popup-div">
           <h3>Upload File</h3>
-          <form action="addfile.php" method="POST">
+          <form action="addfile.php" method="POST" enctype="multipart/form-data">
             <input type="file" name="file" id="file-upload"/>
+            <input type="hidden" name="currentdirectory" id="currentdirectory"/>
             <input type="submit" name="submit" value="Upload" class="submit"/>
           </form>
         </div>
       </div>
     </div>
     <form method="POST" action="" id="file-form">
-      <input type="text" name="directory" id="get-directory"/>
+      <input type="hidden" name="directory" id="get-directory"/>
     </form>
   </div>
 </body>

@@ -29,7 +29,8 @@ $("#search-button").click(function() {
 })
 
 $(".folder").click(function() {
-  document.getElementById("get-directory").value=$(this).text()
-  console.log($(this).innerText)
+  document.getElementById("get-directory").value="/" + $(this).text()
   $("#file-form").submit();
 })
+
+document.getElementById("currentdirectory").value = document.getElementById("get-directory").value
