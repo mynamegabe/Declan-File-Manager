@@ -2,7 +2,7 @@
 ## Used to be an Application Security Project but now just a cool side project
 ### SQL Server:
 > root@localhost\
-> l3tsg01337
+> 
 
 ### Features
 #### 1. SQL Injection Prevention :syringe:
