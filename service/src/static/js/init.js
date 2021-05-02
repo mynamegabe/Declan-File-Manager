@@ -75,3 +75,14 @@ function itemOpen() {
 function itemClose() {
   $("#item-popup").css("display","none")
 }
+
+function listFavs() {
+  favlist = favlist.split(",")
+  files = document.querySelectorAll(".file")
+  files.forEach(file => {
+    if (favlist.includes(file.innerText)) {
+      file.classList.add("fav")
+    }
+  });
+
+}

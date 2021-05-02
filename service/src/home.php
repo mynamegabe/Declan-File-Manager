@@ -30,6 +30,24 @@ if(isset($_SESSION["userId"])) {
 }
 
 include 'db_connection.php';
+$sql = $conn->prepare("SELECT * FROM files1 WHERE fav = True AND userid = ? AND REPLACE(filedir,CONCAT('/',filename),'') = ?");
+$sql->bind_param('s', $_SESSION['userId'], $target_folder);
+$sql->execute();
+
+$result=$sql->get_result();
+if($result){
+    if ($result->num_rows > 0) {
+        $favlist = "";
+        while($row = $result->fetch_assoc()) {
+          if ($row['fav'] == "True")
+            $favlist = $favlist . $row['filedir'] . ",";
+        };
+        echo "<script>favlist = {$favlist}</script>"
+    }
+} else {
+  echo "Error in "."<br>".$conn->error;
+}
+sqlDisconnect($conn);
 ?>
 <html>
 <head>
@@ -126,5 +144,6 @@ include 'db_connection.php';
 </body>
 <footer>
   <script type="text/javascript" src="static/js/script.js"></script>
+  <script>listFavs()</script>
 </footer>
 </html>
