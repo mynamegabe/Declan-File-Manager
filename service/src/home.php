@@ -89,6 +89,11 @@ include 'db_connection.php';
       </div>
     </div>
 
+    <div id="item-popup">
+      <button type="button" onclick="itemClose()">X</button>
+      <div id="image-container"></div>
+    </div>
+
     <div id="folder-popup">
       <div>
         <button type="button" id="folder-close" onclick="addFolderClose()">X</button>

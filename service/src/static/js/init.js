@@ -67,3 +67,11 @@ function addFile() {
 function addFileClose() {
   $("#file-popup").css("display","none")
 }
+
+function itemOpen() {
+  $("#item-popup").css("display","block")
+}
+
+function itemClose() {
+  $("#item-popup").css("display","none")
+}

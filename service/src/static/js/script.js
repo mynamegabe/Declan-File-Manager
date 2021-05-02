@@ -33,4 +33,30 @@ $(".folder").click(function() {
   $("#file-form").submit();
 })
 
+$('.file').click(function () {
+    itemOpen()
+    var req = new XMLHttpRequest();
+    req.open("POST", "loadfile.php", true);
+    req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    var filedir = "filedir=" + document.getElementById("get-directory").value + $(this).text()
+    req.send(filedir);
+    req.onload = function() {
+      resp = req.responseText
+      if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
+        image = new Image();
+          image.src = req.responseText
+          image.onload = function () {
+              $('#image-container').empty().append(image);
+          };
+          image.onerror = function () {
+              $('#image-container').empty().html('The image is not available.');
+          }
+
+          $('#image-holder').empty().html('Loading...');
+
+          return false;
+      }
+    }
+});
+
 document.getElementById("currentdirectory").value = document.getElementById("get-directory").value
