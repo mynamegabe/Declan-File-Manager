@@ -489,7 +489,8 @@ legend {
 }
 .file {
   display:inline-block;
-  width:160px;
+  min-width:120px;
+  padding: 0px 20px;
   height:50px;
   background-color:rgb(255, 248, 227);
   border-radius:5px;
@@ -498,7 +499,7 @@ legend {
   line-height:50px;
   vertical-align: middle;
   text-align: center;
-  font-size:18px;
+  font-size:16px;
   font-weight:bold;
   cursor: pointer;
   margin:10px;

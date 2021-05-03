@@ -1,11 +1,16 @@
 <?php
+include 'db_connection.php';
+$conn = sqlConnect();
 session_start();
 
 if(isset($_SESSION["userId"])) {
 
   $userid = $_SESSION["userId"];
   $method = $_SERVER['REQUEST_METHOD'];
-  if ($method === 'GET') {
+  if (isset($_SESSION["wd"])) {
+    $target_folder = 'files/' . $_SESSION["userId"] . $_SESSION["wd"];
+    unset($_SESSION["wd"]);
+  } elseif ($method === 'GET') {
     $target_folder = 'files/' . $_SESSION["userId"];
   } elseif ($method === "POST") {
     $target_folder = 'files/' . $_SESSION["userId"] . $_POST["directory"];
@@ -29,9 +34,8 @@ if(isset($_SESSION["userId"])) {
   header("Location: ./index.php");
 }
 
-include 'db_connection.php';
 $sql = $conn->prepare("SELECT * FROM files1 WHERE fav = True AND userid = ? AND REPLACE(filedir,CONCAT('/',filename),'') = ?");
-$sql->bind_param('s', $_SESSION['userId'], $target_folder);
+$sql->bind_param('ss', $_SESSION['userId'], $target_folder);
 $sql->execute();
 
 $result=$sql->get_result();
@@ -42,7 +46,7 @@ if($result){
           if ($row['fav'] == "True")
             $favlist = $favlist . $row['filedir'] . ",";
         };
-        echo "<script>favlist = {$favlist}</script>"
+        echo "<script>favlist = {$favlist}</script>";
     }
 } else {
   echo "Error in "."<br>".$conn->error;
@@ -144,6 +148,6 @@ sqlDisconnect($conn);
 </body>
 <footer>
   <script type="text/javascript" src="static/js/script.js"></script>
-  <script>listFavs()</script>
+  <script>listFavs(favlist)</script>
 </footer>
 </html>

@@ -76,7 +76,7 @@ function itemClose() {
   $("#item-popup").css("display","none")
 }
 
-function listFavs() {
+function listFavs(lst) {
   favlist = favlist.split(",")
   files = document.querySelectorAll(".file")
   files.forEach(file => {

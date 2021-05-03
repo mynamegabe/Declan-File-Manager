@@ -15,7 +15,7 @@ if (file_exists($target_file)) {
   $filedir = $_POST["currentdirectory"] . "/" . basename($_FILES["file"]["name"]);
 
   $sql = $conn->prepare("INSERT INTO files1 (userid, filedir, filename) VALUES (?, ?, ?)");
-  $sql->bind_param('sss', $_SESSION["userId"], $filedir, basename($_FILES["file"]["name"]);
+  $sql->bind_param('sss', $_SESSION["userId"], $filedir, basename($_FILES["file"]["name"]));
   if ($sql->execute() === FALSE) {
     $_SESSION["error"] = "Server Error";
     echo $sql -> error;
@@ -30,6 +30,7 @@ if (file_exists($target_file)) {
     }
   }
   sqlDisconnect($conn);
-  header("Location: ./lol1.php");
-  $_SESSION["error"] = "File added! :D";
+  $_SESSION["userId"];
+  $_SESSION["wd"] = $_POST["currentdirectory"];
+  header("Location: ./home.php");
 }

@@ -18,13 +18,14 @@ if (1==1) {
     $id = generateRandomString();
     $conn = sqlConnect();
     $db_id = "files" . strval(rand(1,5));
-    /*error_reporting(E_ALL);
+    
+    error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    */
+
 
     $sql = $conn->prepare("INSERT INTO users (userid, firstname, lastname, email, password, db) VALUES (?, ?, ?, ?, ?, ?)");
 
-    /*echo $conn->error;*/
+    echo $conn->error;
 
     $sql->bind_param('ssssss', $id, $firstname, $lastname, $email, $password, $db_id);
     if ($sql->execute() === TRUE) {

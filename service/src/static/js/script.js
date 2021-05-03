@@ -24,6 +24,8 @@ function checkHeight() {
   }
 }
 
+document.getElementById("get-directory").value = $("#dir").text()
+
 $("#search-button").click(function() {
   $("#search-form").submit();
 })
