@@ -43,8 +43,8 @@ $sql->execute();
 
 $result=$sql->get_result();
 if($result){
+    $favlist = "";
     if ($result->num_rows > 0) {
-        $favlist = "";
         while($row = $result->fetch_assoc()) {
           if ($row['fav'] == "True")
             $favlist = $favlist . $row['filename'] . ",";
@@ -103,7 +103,7 @@ sqlDisconnect($conn);
       <div id="folders">
         <?php
         foreach($folders as $folder) {
-          echo "<div class='folder'>" . $folder . "</div>";
+          echo "<div class='folder notActive'>" . $folder . "<img src='static/images/icons/more.png' class='folder-context-button context-button'/></div>";
         }
         ?>
       </div>
@@ -111,7 +111,7 @@ sqlDisconnect($conn);
       <div id="files">
         <?php
         foreach($files as $file) {
-          echo "<div class='file'>" . $file . "</div>";
+          echo "<div class='file notActive'>" . $file . "<img src='static/images/icons/more.png' class='file-context-button context-button'/></div>";
         }
         ?>
       </div>
@@ -119,7 +119,7 @@ sqlDisconnect($conn);
 
     <div id="item-popup">
       <button type="button" onclick="itemClose()">X</button>
-      <div id="image-container"></div>
+      <div id="file-container"></div>
     </div>
 
     <div id="folder-popup">
@@ -146,6 +146,9 @@ sqlDisconnect($conn);
           </form>
         </div>
       </div>
+    </div>
+    <div id="file-context-menu">
+
     </div>
     <form method="POST" action="" id="file-form">
       <input type="hidden" name="directory" id="get-directory"/>

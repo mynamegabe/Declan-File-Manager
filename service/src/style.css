@@ -504,6 +504,7 @@ legend {
   cursor: pointer;
   margin:10px;
   position:relative;
+  z-index:1;
 }
 
 #folders,#files {
@@ -516,7 +517,7 @@ legend {
   font-size:30px !important;
 }
 
-#image-container {
+#file-container {
   max-width:
 }
 
@@ -526,4 +527,31 @@ legend {
   left:15px;
   top:50%;
   transform:translate(-50%,-50%);
+}
+
+#file-container p {
+  color:black;
+  max-height:80vh;
+  overflow-y:scroll;
+}
+
+.context-button {
+  opacity:0;
+  width:20px;
+  transition:opacity 0.5s;
+  position: absolute;
+  top:50%;
+  right:0px;
+  transform:translate(-50%,-50%);
+  z-index:2;
+}
+
+#file-context-menu {
+  display:block;
+  width:400px;
+  height:600px;
+  position: fixed;
+  background-color:white;
+  border-radius:5px;
+  box-shadow: 5px 6px 10px #888888;
 }

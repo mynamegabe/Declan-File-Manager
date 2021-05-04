@@ -35,30 +35,62 @@ $(".folder").click(function() {
   $("#file-form").submit();
 })
 
-$('.file').click(function () {
-    itemOpen()
-    var req = new XMLHttpRequest();
-    req.open("POST", "loadfile.php", true);
-    req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    var filedir = "filedir=" + document.getElementById("get-directory").value + $(this).text()
-    req.send(filedir);
-    req.onload = function() {
-      resp = req.responseText
-      if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
-        image = new Image();
-          image.src = req.responseText
-          image.onload = function () {
-              $('#image-container').empty().append(image);
-          };
-          image.onerror = function () {
-              $('#image-container').empty().html('The image is not available.');
-          }
+function fileOnClick() {
+  itemOpen()
+  var req = new XMLHttpRequest();
+  req.open("POST", "loadfile.php", true);
+  req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  var filedir = "filedir=" + document.getElementById("get-directory").value + "/" + $(this).text()
+  req.send(filedir);
+  req.onload = function() {
+    resp = req.responseText
+    if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
+      image = new Image();
+        image.src = req.responseText
+        image.onload = function () {
+            $('#file-container').empty().append(image);
+        };
+        image.onerror = function () {
+            $('#file-container').empty().html('The image is not available.');
+        }
 
-          $('#image-holder').empty().html('Loading...');
+        $('#image-holder').empty().html('Loading...');
 
-          return false;
+        return false;
+    } else if (resp.endsWith(".txt")){
+      var filereq = new XMLHttpRequest();
+      filereq.open('GET', req.responseText);
+      filereq.onreadystatechange = function() {
+        textdoc = document.createElement("p");
+        textdoc.innerText = filereq.responseText;
+        $('#file-container').empty().append(textdoc);
       }
+      filereq.send();
     }
+  }
+}
+$('.file, .notActive').click(function () {
+  fileOnClick()
 });
 
 document.getElementById("currentdirectory").value = document.getElementById("get-directory").value
+
+$('.file').hover(function() {
+  var context = $(this).children()[0]
+  $(context).css("opacity","1");
+}, function() {
+  var context = $(this).children()[0]
+  $(context).css("opacity","0");
+})
+
+var fileOC = function() {fileOnClick()};
+$('.context-button').hover(function() {
+  $(this).parent().toggleClass("notActive").off('click');
+}, function() {
+  $(this).parent().toggleClass("notActive");
+  $(this).parent().on("click",fileOC);
+});
+
+$('.file-context-button').click(function () {
+  $("#file-context-menu").css("display","block");
+})
