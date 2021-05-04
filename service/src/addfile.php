@@ -12,7 +12,11 @@ if (file_exists($target_file)) {
 
   error_reporting(E_ALL);
   ini_set('display_errors', 1);
-  $filedir = $_POST["currentdirectory"] . "/" . basename($_FILES["file"]["name"]);
+  if ($_POST["currentdirectory"][0] == "/") {
+    $filedir = "/" . basename($_FILES["file"]["name"]);
+  } else {
+    $filedir = $_POST["currentdirectory"] . "/" . basename($_FILES["file"]["name"]);
+  }
 
   $sql = $conn->prepare("INSERT INTO files1 (userid, filedir, filename) VALUES (?, ?, ?)");
   $sql->bind_param('sss', $_SESSION["userId"], $filedir, basename($_FILES["file"]["name"]));

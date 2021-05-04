@@ -490,7 +490,7 @@ legend {
 .file {
   display:inline-block;
   min-width:120px;
-  padding: 0px 20px;
+  padding: 0px 30px;
   height:50px;
   background-color:rgb(255, 248, 227);
   border-radius:5px;
@@ -503,6 +503,7 @@ legend {
   font-weight:bold;
   cursor: pointer;
   margin:10px;
+  position:relative;
 }
 
 #folders,#files {
@@ -513,4 +514,16 @@ legend {
 #dir {
   font-weight: 900 !important;
   font-size:30px !important;
+}
+
+#image-container {
+  max-width:
+}
+
+.fav-logo {
+  width:20px;
+  position:absolute;
+  left:15px;
+  top:50%;
+  transform:translate(-50%,-50%);
 }

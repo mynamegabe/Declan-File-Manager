@@ -78,10 +78,14 @@ function itemClose() {
 
 function listFavs(lst) {
   favlist = favlist.split(",")
+  favlogo = document.createElement("img")
+  favlogo.setAttribute("src","static/images/icons/favourite.png")
+  favlogo.classList.add("fav-logo")
   files = document.querySelectorAll(".file")
   files.forEach(file => {
     if (favlist.includes(file.innerText)) {
       file.classList.add("fav")
+      file.appendChild(favlogo)
     }
   });
 

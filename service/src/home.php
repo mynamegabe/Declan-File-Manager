@@ -9,16 +9,18 @@ if(isset($_SESSION["userId"])) {
   $method = $_SERVER['REQUEST_METHOD'];
   if (isset($_SESSION["wd"])) {
     $target_folder = 'files/' . $_SESSION["userId"] . $_SESSION["wd"];
+    $currentdir = $_SESSION["wd"];
     unset($_SESSION["wd"]);
   } elseif ($method === 'GET') {
     $target_folder = 'files/' . $_SESSION["userId"];
+    $currentdir = "/";
   } elseif ($method === "POST") {
     $target_folder = 'files/' . $_SESSION["userId"] . $_POST["directory"];
+    $currentdir = $_POST["directory"];
   }
   $all = scandir($target_folder);
   $folders = array();
   $files = array();
-
   foreach($all as $file) {
     if (!($file == "." || $file == "..")) {
       if (is_dir($target_folder . "/" . $file)) {
@@ -34,8 +36,9 @@ if(isset($_SESSION["userId"])) {
   header("Location: ./index.php");
 }
 
-$sql = $conn->prepare("SELECT * FROM files1 WHERE fav = True AND userid = ? AND REPLACE(filedir,CONCAT('/',filename),'') = ?");
-$sql->bind_param('ss', $_SESSION['userId'], $target_folder);
+$sql = $conn->prepare("SELECT * FROM files1 WHERE fav = 'True' AND userid = ? AND filedir LIKE ?");
+$dir_query = "%" . $currentdir . "%";
+$sql->bind_param('ss', $_SESSION['userId'],$dir_query);
 $sql->execute();
 
 $result=$sql->get_result();
@@ -44,9 +47,9 @@ if($result){
         $favlist = "";
         while($row = $result->fetch_assoc()) {
           if ($row['fav'] == "True")
-            $favlist = $favlist . $row['filedir'] . ",";
+            $favlist = $favlist . $row['filename'] . ",";
         };
-        echo "<script>favlist = {$favlist}</script>";
+        $favlist = substr($favlist,0,-1);
     }
 } else {
   echo "Error in "."<br>".$conn->error;
@@ -64,6 +67,9 @@ sqlDisconnect($conn);
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+  <script>
+  var favlist = <?php echo "'" . $favlist . "'"; ?>;
+  </script>
   <div id="navbar">
     <img src="static/images/logo_transparent.png" id="mini-logo"/>
     <form method="POST" action="search.php" id="search-form">
