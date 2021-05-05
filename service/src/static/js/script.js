@@ -35,7 +35,8 @@ $(".folder").click(function() {
   $("#file-form").submit();
 })
 
-function fileOnClick() {
+
+$('.file, .notActive').click(function () {
   itemOpen()
   var req = new XMLHttpRequest();
   req.open("POST", "loadfile.php", true);
@@ -44,7 +45,9 @@ function fileOnClick() {
   req.send(filedir);
   req.onload = function() {
     resp = req.responseText
+    console.log(resp)
     if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
+      console.log("mom")
       image = new Image();
         image.src = req.responseText
         image.onload = function () {
@@ -58,6 +61,7 @@ function fileOnClick() {
 
         return false;
     } else if (resp.endsWith(".txt")){
+      console.log("gay")
       var filereq = new XMLHttpRequest();
       filereq.open('GET', req.responseText);
       filereq.onreadystatechange = function() {
@@ -68,9 +72,6 @@ function fileOnClick() {
       filereq.send();
     }
   }
-}
-$('.file, .notActive').click(function () {
-  fileOnClick()
 });
 
 document.getElementById("currentdirectory").value = document.getElementById("get-directory").value
@@ -83,12 +84,47 @@ $('.file').hover(function() {
   $(context).css("opacity","0");
 })
 
-var fileOC = function() {fileOnClick()};
 $('.context-button').hover(function() {
   $(this).parent().toggleClass("notActive").off('click');
 }, function() {
   $(this).parent().toggleClass("notActive");
-  $(this).parent().on("click",fileOC);
+  $('.file, .notActive').click(function () {
+    itemOpen()
+    var req = new XMLHttpRequest();
+    req.open("POST", "loadfile.php", true);
+    req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    var filedir = "filedir=" + document.getElementById("get-directory").value + "/" + $(this).text()
+    req.send(filedir);
+    req.onload = function() {
+      resp = req.responseText
+      console.log(resp)
+      if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
+        console.log("mom")
+        image = new Image();
+          image.src = req.responseText
+          image.onload = function () {
+              $('#file-container').empty().append(image);
+          };
+          image.onerror = function () {
+              $('#file-container').empty().html('The image is not available.');
+          }
+
+          $('#image-holder').empty().html('Loading...');
+
+          return false;
+      } else if (resp.endsWith(".txt")){
+        console.log("gay")
+        var filereq = new XMLHttpRequest();
+        filereq.open('GET', req.responseText);
+        filereq.onreadystatechange = function() {
+          textdoc = document.createElement("p");
+          textdoc.innerText = filereq.responseText;
+          $('#file-container').empty().append(textdoc);
+        }
+        filereq.send();
+      }
+    }
+  });
 });
 
 $('.file-context-button').click(function () {

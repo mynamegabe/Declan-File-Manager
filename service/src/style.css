@@ -485,7 +485,7 @@ legend {
 }
 
 .folder:nth-child(1),.file:nth-child(1) {
-  margin-left:0px;
+  margin-left:10px;
 }
 .file {
   display:inline-block;
@@ -509,7 +509,7 @@ legend {
 
 #folders,#files {
   margin-left:30px;
-  display:flex;
+  display:block;
 }
 
 #dir {
