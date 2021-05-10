@@ -76,6 +76,14 @@ function itemClose() {
   $("#item-popup").css("display","none")
 }
 
+function fileContextOpen() {
+  $("#file-context-popup").css("display","block")
+}
+
+function fileContextClose() {
+  $("#file-context-popup").css("display","none")
+}
+
 function listFavs(lst) {
   favlist = favlist.split(",")
   favlogo = document.createElement("img")

@@ -546,12 +546,45 @@ legend {
   z-index:2;
 }
 
+#file-context-popup {
+  background-color:rgba(0,0,0,0);
+  width:100%;
+  height:100%;
+  position: fixed;
+  top:0px;
+  display:none;
+  z-index:1;
+}
+
 #file-context-menu {
   display:block;
-  width:400px;
-  height:600px;
+  width:200px;
+  height:350px;
   position: fixed;
   background-color:white;
   border-radius:5px;
   box-shadow: 5px 6px 10px #888888;
+  z-index:2;
+}
+
+.file-context-option {
+  height:40px;
+  color:black;
+  line-height:40px;
+  vertical-align: middle;
+  font-size:15px;
+  font-weight:600;
+  margin:10px;
+  transition:background-color 0.5s ease-in-out;
+}
+
+.file-context-option:hover {
+  background-color:#fff8e3;
+}
+
+.file-context-option img {
+  height:25px;
+  line-height:30px;
+  margin:0px 20px;
+  vertical-align: middle;
 }

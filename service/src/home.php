@@ -147,8 +147,25 @@ sqlDisconnect($conn);
         </div>
       </div>
     </div>
-    <div id="file-context-menu">
 
+    <div id="file-context-popup">
+      <div id="file-context-menu">
+        <div id="file-context-duplicate" class="file-context-option">
+          <img src="static/images/icons/duplicate.png"/>Duplicate
+        </div>
+        <div id="file-context-move" class="file-context-option">
+
+        </div>
+        <div id="file-context-delete" class="file-context-option">
+
+        </div>
+        <div id="file-context-fav" class="file-context-option">
+
+        </div>
+        <div id="file-context-share" class="file-context-option">
+
+        </div>
+      </div>
     </div>
     <form method="POST" action="" id="file-form">
       <input type="hidden" name="directory" id="get-directory"/>

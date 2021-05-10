@@ -99,7 +99,6 @@ $('.context-button').hover(function() {
       resp = req.responseText
       console.log(resp)
       if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
-        console.log("mom")
         image = new Image();
           image.src = req.responseText
           image.onload = function () {
@@ -127,6 +126,25 @@ $('.context-button').hover(function() {
   });
 });
 
-$('.file-context-button').click(function () {
+$('.file-context-button').click(function ( event ) {
+  fileContextOpen()
   $("#file-context-menu").css("display","block");
+  $("#file-context-menu").css("left",event.pageX);
+  $("#file-context-menu").css("top",event.pageY);
+  var left = event.pageX;
+  var right = event.pageY;
+})
+
+$('#file-context-popup').click(function() {
+  fileContextClose()
+  $("#file-context-menu").css("display","none");
+})
+
+$("#file-context-menu").hover(function() {
+  $('#file-context-popup').off('click')
+}, function() {
+  $('#file-context-popup').click(function() {
+    fileContextClose()
+    $("#file-context-menu").css("display","none");
+  })
 })

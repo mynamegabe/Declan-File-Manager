@@ -45,5 +45,5 @@ if (file_exists($target_file)) {
   sqlDisconnect($conn);
   $_SESSION["userId"];
   $_SESSION["wd"] = $_POST["currentdirectory"];
-  //header("Location: ./home.php");
+  header("Location: ./home.php");
 }
