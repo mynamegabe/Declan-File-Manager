@@ -45,9 +45,7 @@ $('.file, .notActive').click(function () {
   req.send(filedir);
   req.onload = function() {
     resp = req.responseText
-    console.log(resp)
     if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
-      console.log("mom")
       image = new Image();
         image.src = req.responseText
         image.onload = function () {
@@ -61,7 +59,6 @@ $('.file, .notActive').click(function () {
 
         return false;
     } else if (resp.endsWith(".txt")){
-      console.log("gay")
       var filereq = new XMLHttpRequest();
       filereq.open('GET', req.responseText);
       filereq.onreadystatechange = function() {
@@ -97,7 +94,6 @@ $('.context-button').hover(function() {
     req.send(filedir);
     req.onload = function() {
       resp = req.responseText
-      console.log(resp)
       if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
         image = new Image();
           image.src = req.responseText
@@ -112,7 +108,6 @@ $('.context-button').hover(function() {
 
           return false;
       } else if (resp.endsWith(".txt")){
-        console.log("gay")
         var filereq = new XMLHttpRequest();
         filereq.open('GET', req.responseText);
         filereq.onreadystatechange = function() {
@@ -131,6 +126,8 @@ $('.file-context-button').click(function ( event ) {
   $("#file-context-menu").css("display","block");
   $("#file-context-menu").css("left",event.pageX);
   $("#file-context-menu").css("top",event.pageY);
+  document.getElementById("use-filename").innerText=$($(this).parent()).text()
+  $(this).parent().addClass("del")
   var left = event.pageX;
   var right = event.pageY;
 })
@@ -147,4 +144,39 @@ $("#file-context-menu").hover(function() {
     fileContextClose()
     $("#file-context-menu").css("display","none");
   })
+})
+
+$('#file-context-duplicate').click(function() {
+  var req = new XMLHttpRequest();
+  req.open("POST", "duplicatefile.php", true);
+  req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  var filedir = "filedir=" + document.getElementById("get-directory").value + "/" + $(this).text()
+  req.send(filedir);
+  req.onload = function() {
+
+  }
+})
+
+$('#file-context-delete').click(function() {
+  document.querySelector("#file-delete-div h3 span").innerText = " " + document.getElementById("use-filename").innerText
+  $('#file-context-delete-confirm-box').css('display','block')
+  $()
+})
+
+$('#file-context-delete-confirm').click(function() {
+  var req = new XMLHttpRequest();
+  req.open("POST", "deletefile.php", true);
+  req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  var query = "currentdirectory=" + document.getElementById("get-directory").value + "&filename=" + document.getElementById("use-filename").innerText
+  req.send(query);
+  req.onload = function() {
+    if (getCookie("Success")=="True") {
+      alert("File deleted")
+      $(".del").remove()
+    } else {
+      alert("Error in file deletion")
+      $(".del").removeClass("del")
+    }
+    deleteFileClose()
+  }
 })

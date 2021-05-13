@@ -154,22 +154,39 @@ sqlDisconnect($conn);
           <img src="static/images/icons/duplicate.png"/>Duplicate
         </div>
         <div id="file-context-move" class="file-context-option">
-
+          <img src="static/images/icons/move.png"/>Move
         </div>
         <div id="file-context-delete" class="file-context-option">
-
+          <img src="static/images/icons/trash-bin.png"/>Delete
         </div>
         <div id="file-context-fav" class="file-context-option">
-
+          <img src="static/images/icons/nofavourite.png"/>Favourite
         </div>
         <div id="file-context-share" class="file-context-option">
-
+          <img src="static/images/icons/share.png"/>Share
         </div>
       </div>
     </div>
+
+
+    <div id="file-context-delete-confirm-box">
+      <div>
+        <button type="button" id="delete-close" onclick="deleteFileClose()">X</button>
+        <div id="file-delete-div">
+          <h3>Are you sure you want to delete<span></span></h3>
+          <button id="file-context-delete-confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
     <form method="POST" action="" id="file-form">
       <input type="hidden" name="directory" id="get-directory"/>
     </form>
+    <input type="hidden" id="use-filename"/>
   </div>
 </body>
 <footer>

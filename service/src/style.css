@@ -345,7 +345,7 @@ legend {
   position: relative;
 }
 
-#folder-popup,#file-popup,#item-popup {
+#folder-popup,#file-popup,#item-popup, #file-context-delete-confirm-box {
   background-color:rgba(0,0,0,0.5);
   width:100%;
   height:100%;
@@ -559,12 +559,16 @@ legend {
 #file-context-menu {
   display:block;
   width:200px;
-  height:350px;
+  height:300px;
   position: fixed;
   background-color:white;
   border-radius:5px;
   box-shadow: 5px 6px 10px #888888;
   z-index:2;
+}
+
+#file-context-menu form {
+  margin:0px;
 }
 
 .file-context-option {
@@ -574,12 +578,13 @@ legend {
   vertical-align: middle;
   font-size:15px;
   font-weight:600;
-  margin:10px;
-  transition:background-color 0.5s ease-in-out;
+  padding:10px;
+  border-radius:5px;
+  transition:background-color 0.2s ease-in-out;
 }
 
 .file-context-option:hover {
-  background-color:#fff8e3;
+  background-color:#dbdbdb;
 }
 
 .file-context-option img {
@@ -587,4 +592,66 @@ legend {
   line-height:30px;
   margin:0px 20px;
   vertical-align: middle;
+}
+
+#file-context-delete-confirm-box > div {
+  transform:translate(-50%,-50%);
+  position:absolute;
+  top:50%;
+  left:50%;
+  z-index:3;
+  background-color: white;
+  border-radius:5px;
+  text-align:center;
+}
+
+h3 { color: black;}
+
+#file-delete-div h3 {
+  color:black;
+  margin-bottom:0px;
+  margin:25px;
+  display:inline-block;
+}
+
+#file-delete-div h3 span {
+  color:black;
+  font-weight:bold;
+}
+
+#file-context-delete-confirm {
+  width: 100px;
+    height: 40px;
+    margin: 0px;
+    outline: none;
+    border: none;
+    color: black;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ee6c4d;
+    font-weight: 600;
+    transition: background-color 0.5s ease-in-out;
+    margin-right:25px;
+    margin-bottom:20px;
+}
+
+#file-context-delete-confirm:hover {
+  background-color:#fcaf95;
+}
+
+#delete-close {
+  width:40px;
+  height:30px;
+  outline:none;
+  border:none;
+  background-color:#fffffc;
+  border-radius:5px 5px 0px 0px;
+  color:black;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow: 2px 2px 18px rgba(255,255,255,0.8);
+  position:absolute;
+  top:-28px;
+  left:0px;
 }
