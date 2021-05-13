@@ -1,8 +1,8 @@
 # __Declan File Manager__ :briefcase:
 ## Used to be an Application Security Project but now just a cool side project
 ### SQL Server:
-> root@localhost\
-> 
+> root@localhost
+> l3tsg01337
 
 ### Features
 #### 1. User login
@@ -13,6 +13,8 @@
 #### 6. File deletion
 #### 7. File favourites
 #### 8. File sharing
+#### 9. Clean UI(Open to feedback) 
+
 
 ### Security Features
 #### 1. SQL Injection Prevention :syringe:
