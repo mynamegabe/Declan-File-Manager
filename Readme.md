@@ -13,7 +13,8 @@
 #### 6. File deletion
 #### 7. File favourites
 #### 8. File sharing
-#### 9. Clean UI(Open to feedback) 
+#### 9. Storage limitation
+#### 10. Clean UI(Open to feedback) 
 
 
 ### Security Features
