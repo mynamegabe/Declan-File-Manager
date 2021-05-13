@@ -5,6 +5,16 @@
 > 
 
 ### Features
+#### 1. User login
+#### 2. User registration
+#### 3. File viewing
+#### 4. File upload
+#### 5. Folders
+#### 6. File deletion
+#### 7. File favourites
+#### 8. File sharing
+
+### Security Features
 #### 1. SQL Injection Prevention :syringe:
 - Login
 
