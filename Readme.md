@@ -5,15 +5,15 @@
 > l3tsg01337
 
 ### Features
-#### 1. User login
-#### 2. User registration
-#### 3. File viewing
-#### 4. File upload
-#### 5. Folders
-#### 6. File deletion
-#### 7. File favourites
-#### 8. File sharing
-#### 9. Storage limitation
+#### 1. User login [x]
+#### 2. User registration [x]
+#### 3. File viewing [x]
+#### 4. File upload [x]
+#### 5. Folders [x]
+#### 6. File deletion [x]
+#### 7. File favourites [ ]
+#### 8. File sharing [ ]
+#### 9. Storage limitation [ ]
 #### 10. Clean UI(Open to feedback) 
 
 
