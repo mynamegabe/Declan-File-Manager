@@ -119,7 +119,9 @@ sqlDisconnect($conn);
 
     <div id="item-popup">
       <button type="button" onclick="itemClose()">X</button>
-      <div id="file-container"></div>
+      <div id="file-container">
+        <h2 id="item-filename">ds.png</h2>
+      </div>
     </div>
 
     <div id="folder-popup">

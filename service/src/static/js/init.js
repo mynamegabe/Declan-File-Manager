@@ -74,6 +74,7 @@ function itemOpen() {
 
 function itemClose() {
   $("#item-popup").css("display","none")
+  $('#file-container').empty()
 }
 
 function fileContextOpen() {

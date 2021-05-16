@@ -37,26 +37,32 @@ $(".folder").click(function() {
 
 
 $('.file, .notActive').click(function () {
-  itemOpen()
   var req = new XMLHttpRequest();
   req.open("POST", "loadfile.php", true);
   req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  var filedir = "filedir=" + document.getElementById("get-directory").value + "/" + $(this).text()
+  var filename = $(this).text()
+  var filedir = "filedir=" + document.getElementById("get-directory").value + "/" + filename
   req.send(filedir);
   req.onload = function() {
     resp = req.responseText
+    var title = document.createElement("h2")
+    title.setAttribute("id", "item-filename");
+    title.setAttribute("style", "color:black;margin:10px;margin-left:10px;");
+    title.innerText = filename
+    console.log(resp)
     if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
       image = new Image();
         image.src = req.responseText
         image.onload = function () {
-            $('#file-container').empty().append(image);
+            $('#file-container').empty().append(title);
+            $('#file-container').append(image);
         };
         image.onerror = function () {
             $('#file-container').empty().html('The image is not available.');
         }
 
         $('#image-holder').empty().html('Loading...');
-
+        itemOpen()
         return false;
     } else if (resp.endsWith(".txt")){
       var filereq = new XMLHttpRequest();
@@ -64,9 +70,21 @@ $('.file, .notActive').click(function () {
       filereq.onreadystatechange = function() {
         textdoc = document.createElement("p");
         textdoc.innerText = filereq.responseText;
-        $('#file-container').empty().append(textdoc);
+        $('#file-container').empty().append(title);
+        $('#file-container').append(textdoc);
       }
       filereq.send();
+      itemOpen()
+    } else if (resp.endsWith(".mp4")) {
+      var video = $('<video />', {
+        id: 'item-video',
+        src: resp,
+        type: 'video/mp4',
+        controls: true
+      });
+      $('#file-container').empty().append(title);
+      video.appendTo($('#file-container'));
+      itemOpen()
     }
   }
 });
@@ -86,26 +104,32 @@ $('.context-button').hover(function() {
 }, function() {
   $(this).parent().toggleClass("notActive");
   $('.file, .notActive').click(function () {
-    itemOpen()
     var req = new XMLHttpRequest();
     req.open("POST", "loadfile.php", true);
     req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    var filedir = "filedir=" + document.getElementById("get-directory").value + "/" + $(this).text()
+    var filename = $(this).text()
+    var filedir = "filedir=" + document.getElementById("get-directory").value + "/" + filename
     req.send(filedir);
     req.onload = function() {
       resp = req.responseText
+      var title = document.createElement("h2")
+      title.setAttribute("id", "item-filename");
+      title.setAttribute("style", "color:black;margin:10px;margin-left:10px;");
+      title.innerText = filename
+      console.log(resp)
       if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
         image = new Image();
           image.src = req.responseText
           image.onload = function () {
-              $('#file-container').empty().append(image);
+              $('#file-container').empty().append(title);
+              $('#file-container').append(image);
           };
           image.onerror = function () {
               $('#file-container').empty().html('The image is not available.');
           }
 
           $('#image-holder').empty().html('Loading...');
-
+          itemOpen()
           return false;
       } else if (resp.endsWith(".txt")){
         var filereq = new XMLHttpRequest();
@@ -113,9 +137,21 @@ $('.context-button').hover(function() {
         filereq.onreadystatechange = function() {
           textdoc = document.createElement("p");
           textdoc.innerText = filereq.responseText;
-          $('#file-container').empty().append(textdoc);
+          $('#file-container').empty().append(title);
+          $('#file-container').append(textdoc);
         }
         filereq.send();
+        itemOpen()
+      } else if (resp.endsWith(".mp4")) {
+        var video = $('<video />', {
+          id: 'item-video',
+          src: resp,
+          type: 'video/mp4',
+          controls: true
+        });
+        $('#file-container').empty().append(title);
+        video.appendTo($('#file-container'));
+        itemOpen()
       }
     }
   });
