@@ -158,6 +158,52 @@ $('.context-button').hover(function() {
 });
 
 $('.file-context-button').click(function ( event ) {
+  if ($(this).siblings().is($('.fav-logo'))) {
+    $('.file-context-fav-switch').attr('id','file-context-unfav')
+    document.querySelector('.file-context-fav-switch').innerHTML = "<img src='static/images/icons/favourite.png' id='fav-context-img'/>Unfavourite"
+
+
+    $('.file-context-fav-switch').off('click')
+    $('.file-context-fav-switch').click(function() {
+      var req = new XMLHttpRequest();
+      req.open("POST", "unfavfile.php", true);
+      req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+      var query = "currentdirectory=" + document.getElementById("get-directory").value + "&filename=" + document.getElementById("use-filename").innerText
+      req.send(query);
+      req.onload = function() {
+        if (getCookie("Success")=="True") {
+          //alert("File favourited")
+        } else {
+          //alert("Error in file favouriting")
+        }
+        location.reload();
+      }
+    })
+
+
+  } else {
+    $('.file-context-fav-switch').attr('id','file-context-fav')
+    document.querySelector('.file-context-fav-switch').innerHTML = "<img src='static/images/icons/nofavourite.png' id='fav-context-img'/>Favourite"
+
+    $('.file-context-fav-switch').off('click')
+    $('.file-context-fav-switch').click(function() {
+      var req = new XMLHttpRequest();
+      req.open("POST", "favfile.php", true);
+      req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+      var query = "currentdirectory=" + document.getElementById("get-directory").value + "&filename=" + document.getElementById("use-filename").innerText
+      req.send(query);
+      req.onload = function() {
+        if (getCookie("Success")=="True") {
+          alert("File favourited")
+        } else {
+          alert("Error in file favouriting")
+        }
+        location.reload();
+      }
+    })
+
+
+  }
   fileContextOpen()
   $("#file-context-menu").css("display","block");
   $("#file-context-menu").css("left",event.pageX);
@@ -196,7 +242,6 @@ $('#file-context-duplicate').click(function() {
 $('#file-context-delete').click(function() {
   document.querySelector("#file-delete-div h3 span").innerText = " " + document.getElementById("use-filename").innerText
   $('#file-context-delete-confirm-box').css('display','block')
-  $()
 })
 
 $('#file-context-delete-confirm').click(function() {
@@ -206,12 +251,15 @@ $('#file-context-delete-confirm').click(function() {
   var query = "currentdirectory=" + document.getElementById("get-directory").value + "&filename=" + document.getElementById("use-filename").innerText
   req.send(query);
   req.onload = function() {
+    console.log(getCookie("Success"))
     if (getCookie("Success")=="True") {
       alert("File deleted")
       $(".del").remove()
+      document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     } else {
       alert("Error in file deletion")
       $(".del").removeClass("del")
+      document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     }
     deleteFileClose()
   }

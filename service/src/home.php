@@ -161,8 +161,8 @@ sqlDisconnect($conn);
         <div id="file-context-delete" class="file-context-option">
           <img src="static/images/icons/trash-bin.png"/>Delete
         </div>
-        <div id="file-context-fav" class="file-context-option">
-          <img src="static/images/icons/nofavourite.png"/>Favourite
+        <div id="file-context-fav" class="file-context-option file-context-fav-switch">
+          <img src="static/images/icons/nofavourite.png" id="fav-context-img"/>Favourite
         </div>
         <div id="file-context-share" class="file-context-option">
           <img src="static/images/icons/share.png"/>Share

@@ -41,7 +41,6 @@ $sql = $conn->prepare("DELETE FROM " . $db . " WHERE userid = ? AND filedir = ? 
 $sql->bind_param('ssi', $_SESSION["userId"], $filedir, $fileid);
 $sql->execute();
 $rows = $sql->num_rows;
-
 if($rows > 0){
   $row = $result->fetch_assoc();
   setCookie("Success","False");
