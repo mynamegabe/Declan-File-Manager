@@ -4,7 +4,7 @@
 > root@localhost
 > l3tsg01337
 
-### Features
+## Features
 #### 1. User login :heavy_check_mark:
 #### 2. User registration :heavy_check_mark:
 #### 3. File viewing :heavy_check_mark:
@@ -19,7 +19,7 @@
 #### 12. Clean UI(Open to feedback) 
 
 
-### Security Features
+## Security Features
 #### 1. SQL Injection Prevention :syringe:
 - Login
 
