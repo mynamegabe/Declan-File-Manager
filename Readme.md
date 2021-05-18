@@ -12,7 +12,7 @@
 #### 5. Folders :heavy_check_mark:
 #### 6. File deletion :heavy_check_mark:
 #### 7. File favourites :heavy_check_mark:
-#### 8. File sharing 
+#### 8. File sharing :heavy_check_mark:
 #### 9. File moving 
 #### 10. File duplicating 
 #### 11. Storage limitation 
