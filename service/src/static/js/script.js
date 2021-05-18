@@ -194,9 +194,9 @@ $('.file-context-button').click(function ( event ) {
       req.send(query);
       req.onload = function() {
         if (getCookie("Success")=="True") {
-          alert("File favourited")
+          //alert("File favourited")
         } else {
-          alert("Error in file favouriting")
+          //alert("Error in file favouriting")
         }
         location.reload();
       }
@@ -232,10 +232,16 @@ $('#file-context-duplicate').click(function() {
   var req = new XMLHttpRequest();
   req.open("POST", "duplicatefile.php", true);
   req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  var filedir = "filedir=" + document.getElementById("get-directory").value + "/" + $(this).text()
-  req.send(filedir);
+  var query = "currentdirectory=" + document.getElementById("get-directory").value + "&filename=" + document.getElementById("use-filename").innerText
+  req.send(query);
   req.onload = function() {
-
+    if (getCookie("Success")=="True") {
+      location.reload();
+      document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    } else {
+      alert("Error in file duplication.")
+      document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    }
   }
 })
 
@@ -251,9 +257,7 @@ $('#file-context-delete-confirm').click(function() {
   var query = "currentdirectory=" + document.getElementById("get-directory").value + "&filename=" + document.getElementById("use-filename").innerText
   req.send(query);
   req.onload = function() {
-    console.log(getCookie("Success"))
     if (getCookie("Success")=="True") {
-      alert("File deleted")
       $(".del").remove()
       document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     } else {

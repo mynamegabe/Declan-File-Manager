@@ -103,6 +103,7 @@ function listFavs(lst) {
 function deleteFileClose() {
   $("#file-context-delete-confirm-box").css("display","none")
   $(".del").removeClass("del")
+  fileContextClose()
 }
 
 function getCookie(name) {
