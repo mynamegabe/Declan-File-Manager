@@ -5,10 +5,11 @@ session_start();
 
 if ($_POST["currentdirectory"] == "/") {
   $target_file = 'files/' . $_SESSION["userId"] . "/" . $_POST["filename"];
+  $filedir = $_POST["currentdirectory"] . $_POST["filename"];
 } else {
   $target_file = 'files/' . $_SESSION["userId"] . $_POST["currentdirectory"] . "/" . $_POST["filename"];
+  $filedir = $_POST["currentdirectory"] . "/" . $_POST["filename"];
 }
-$filedir = $_POST["currentdirectory"] . $_POST["filename"];
 
 
 $sql = $conn->prepare("SELECT db FROM users WHERE userid = ? ");

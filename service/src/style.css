@@ -374,6 +374,8 @@ legend {
   cursor:pointer;
   margin:15px;
   font-weight:700;
+  z-index: 4;
+    position: relative;
 }
 
 #folder-popup > div, #file-popup > div{
@@ -654,4 +656,8 @@ h3 { color: black;}
   position:absolute;
   top:-28px;
   left:0px;
+}
+
+#move-popup {
+  
 }

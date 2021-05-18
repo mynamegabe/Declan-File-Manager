@@ -7,39 +7,16 @@ if(isset($_SESSION["userId"])) {
 
   $userid = $_SESSION["userId"];
   $method = $_SERVER['REQUEST_METHOD'];
-  if (isset($_SESSION["wd"])) {
-    $target_folder = 'files/' . $_SESSION["userId"] . $_SESSION["wd"];
-    $currentdir = $_SESSION["wd"];
-    unset($_SESSION["wd"]);
-  } elseif ($method === 'GET') {
-    $target_folder = 'files/' . $_SESSION["userId"];
-    $currentdir = "/";
-  } elseif ($method === "POST") {
-    $target_folder = 'files/' . $_SESSION["userId"] . $_POST["directory"];
-    $currentdir = $_POST["directory"];
-  }
-  $all = scandir($target_folder);
-  $folders = array();
-  $files = array();
-  foreach($all as $file) {
-    if (!($file == "." || $file == "..")) {
-      echo $file;
-      if (is_dir($target_folder . "/" . $file)) {
-        array_push($folders,$file);
-      } else {
-        array_push($files,$file);
-      }
-    }
-  }
 
 } else {
   $_SESSION["error"] = "Not logged in! D:";
   header("Location: ./index.php");
 }
 
-$sql = $conn->prepare("SELECT * FROM files1 WHERE fav = 'True' AND userid = ? AND filedir LIKE ?");
-$dir_query = "%" . $currentdir . "%";
-$sql->bind_param('ss', $_SESSION['userId'],$dir_query);
+$files = array();
+
+$sql = $conn->prepare("SELECT * FROM files1 WHERE fav = 'True' AND userid = ?");
+$sql->bind_param('s', $_SESSION['userId']);
 $sql->execute();
 
 $result=$sql->get_result();
@@ -49,6 +26,7 @@ if($result){
         while($row = $result->fetch_assoc()) {
           if ($row['fav'] == "True")
             $favlist = $favlist . $row['filename'] . ",";
+            array_push($files,$row['filename']);
         };
         $favlist = substr($favlist,0,-1);
     }
@@ -56,15 +34,6 @@ if($result){
   echo "Error in "."<br>".$conn->error;
 }
 sqlDisconnect($conn);
-
-
-//Move file, allow only depth = 2 subdirectories, fix making new folders in folder
-/*
-$directories = glob('/files/'. $_SESSION['userId'] . '/*' , GLOB_ONLYDIR);
-forEach($folders as $folder) {
-  echo $folder;
-}
-*/
 ?>
 <html>
 <head>
@@ -102,22 +71,7 @@ forEach($folders as $folder) {
       <a href="/home.php"><img src="/static/images/icons/trash-bin.png"/></a>
     </div>
     <div id="content">
-      <?php
-      if (isset($_POST["directory"])) {
-        echo "<h1 id='dir'>" . $_POST["directory"] . "</h1>";
-      } else {
-        echo "<h1 id='dir'>" . "/" . "</h1>";
-      }
-      ?>
-      <h1>Folders</h1>
-      <div id="folders">
-        <?php
-        foreach($folders as $folder) {
-          echo "<div class='folder notActive'>" . $folder . "<img src='static/images/icons/more.png' class='folder-context-button context-button'/></div>";
-        }
-        ?>
-      </div>
-      <h1>Files</h1>
+      <h1>Favourites</h1>
       <div id="files">
         <?php
         foreach($files as $file) {
@@ -139,9 +93,9 @@ forEach($folders as $folder) {
         <button type="button" id="folder-close" onclick="addFolderClose()">X</button>
         <div id="folder-popup-div">
           <h3>New Folder</h3>
-          <form>
+          <form action="addfolder.php" method="POST">
             <input type="text" name="foldername" placeholder="Folder Name" id="foldername"/>
-            <button type="button" value="Add Folder" class="submit" id="add-folder-button">Add Folder</button>
+            <input type="submit" name="submit" value="Add Folder" class="submit"/>
           </form>
         </div>
       </div>
@@ -178,17 +132,6 @@ forEach($folders as $folder) {
           <img src="static/images/icons/share.png"/>Share
         </div>
       </div>
-
-
-      <div id="move-menu">
-        <div class="1">
-
-        </div>
-        <div class="1">
-
-        </div>
-
-      </div>
     </div>
 
 
@@ -201,6 +144,9 @@ forEach($folders as $folder) {
         </div>
       </div>
     </div>
+
+
+
 
 
     <form method="POST" action="" id="file-form">

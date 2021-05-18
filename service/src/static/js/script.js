@@ -171,6 +171,7 @@ $('.file-context-button').click(function ( event ) {
       var query = "currentdirectory=" + document.getElementById("get-directory").value + "&filename=" + document.getElementById("use-filename").innerText
       req.send(query);
       req.onload = function() {
+        console.log(req.responseText)
         if (getCookie("Success")=="True") {
           //alert("File favourited")
         } else {
@@ -193,6 +194,7 @@ $('.file-context-button').click(function ( event ) {
       var query = "currentdirectory=" + document.getElementById("get-directory").value + "&filename=" + document.getElementById("use-filename").innerText
       req.send(query);
       req.onload = function() {
+        console.log(req.responseText)
         if (getCookie("Success")=="True") {
           //alert("File favourited")
         } else {
@@ -266,5 +268,17 @@ $('#file-context-delete-confirm').click(function() {
       document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     }
     deleteFileClose()
+  }
+})
+
+$("#add-folder-button").click( function() {
+  var req = new XMLHttpRequest();
+  req.open("POST", "addfolder.php", true);
+  req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  var query = "currentdirectory=" + document.getElementById("get-directory").value + "&foldername=" + document.getElementById("foldername").value
+  req.send(query);
+  req.onload = function() {
+    addFolderClose()
+    location.reload()
   }
 })
