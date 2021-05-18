@@ -11,10 +11,12 @@
 #### 4. File upload :heavy_check_mark:
 #### 5. Folders :heavy_check_mark:
 #### 6. File deletion :heavy_check_mark:
-#### 7. File favourites 
+#### 7. File favourites :heavy_check_mark:
 #### 8. File sharing 
-#### 9. Storage limitation 
-#### 10. Clean UI(Open to feedback) 
+#### 9. File moving 
+#### 10. File duplicating 
+#### 11. Storage limitation 
+#### 12. Clean UI(Open to feedback) 
 
 
 ### Security Features
