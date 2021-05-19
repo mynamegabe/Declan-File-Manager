@@ -23,7 +23,6 @@ if(isset($_SESSION["userId"])) {
   $files = array();
   foreach($all as $file) {
     if (!($file == "." || $file == "..")) {
-      echo $file;
       if (is_dir($target_folder . "/" . $file)) {
         array_push($folders,$file);
       } else {
@@ -59,12 +58,25 @@ sqlDisconnect($conn);
 
 
 //Move file, allow only depth = 2 subdirectories, fix making new folders in folder
+$topleveldirectories = glob('files/'. $_SESSION['userId'] . '/*' , GLOB_ONLYDIR);
 /*
-$directories = glob('/files/'. $_SESSION['userId'] . '/*' , GLOB_ONLYDIR);
 forEach($folders as $folder) {
-  echo $folder;
+  array_push($toplevelfolderlist, $folder);
 }
 */
+$midleveldirectories = array();
+$lowleveldirectories = array();
+foreach($topleveldirectories as $folder1) {
+  $midlevel = glob($folder1 . "/*" , GLOB_ONLYDIR);
+  foreach($midlevel as $folder2) {
+    array_push($midleveldirectories, $folder2);
+    $lowlevel = glob($folder2 . "/*" , GLOB_ONLYDIR);
+    foreach($lowlevel as $folder3) {
+      array_push($lowleveldirectories, $folder3);
+    }
+  }
+}
+
 ?>
 <html>
 <head>
@@ -178,16 +190,46 @@ forEach($folders as $folder) {
           <img src="static/images/icons/share.png"/>Share
         </div>
       </div>
+      <!-- move move menu here -->
+    </div>
+
+    <div id="move-menu">
+      <div id="more-levels">
+        <div class="top-level move-level">
+          <?php
+          /*$topleveldirectories
+          $midleveldirectories
+          $lowleveldirectories
+          */
+
+          foreach($topleveldirectories as $dir) {
+            $filename = substr($dir, strrpos($dir,"/",-1)+1, strlen($dir));
+            echo "<div class='move-menu-option'>" . $filename . "</div>";
+          }
 
 
-      <div id="move-menu">
-        <div class="1">
-
+          ?>
         </div>
-        <div class="1">
 
+        <div class="mid-level move-level">
+          <?php
+          foreach($midleveldirectories as $dir) {
+            $filename = substr($dir, strrpos($dir,"/",-1)+1, strlen($dir));
+            $secondslash = strrpos($dir,"/",-strlen($filename)-2);
+            $parent = substr($dir, $secondslash+1, strrpos($dir,"/",-1)-$secondslash-1);
+            echo "<div class='move-menu-option' data-parent='" . $parent . "'>" . $filename . "</div>";
+          }
+          ?>
         </div>
-
+        <!-- undone -->
+        <div class="low-level move-level">
+          <?php
+          foreach($lowleveldirectories as $dir) {
+            $filename = substr($dir, strrpos($dir,"/",-1)+1, strlen($dir));
+            echo "<div class='move-menu-option'>" . $filename . "</div>";
+          }
+          ?>
+        </div>
       </div>
     </div>
 
