@@ -218,6 +218,7 @@ $('.file-context-button').click(function ( event ) {
 
 $('#file-context-popup').click(function() {
   fileContextClose()
+  fileMoveClose()
   $("#file-context-menu").css("display","none");
 })
 
@@ -226,6 +227,7 @@ $("#file-context-menu").hover(function() {
 }, function() {
   $('#file-context-popup').click(function() {
     fileContextClose()
+    fileMoveClose()
     $("#file-context-menu").css("display","none");
   })
 })
@@ -271,6 +273,15 @@ $('#file-context-delete-confirm').click(function() {
   }
 })
 
+$('#file-context-move').click(function() {
+  fileMoveOpen()
+  var offset = $("#file-context-menu").offset();
+  $("#move-menu").css("left",offset.left - $(window).scrollLeft());
+  $("#move-menu").css("top",offset.top - $(window).scrollTop());
+})
+
+
+
 $("#add-folder-button").click( function() {
   var req = new XMLHttpRequest();
   req.open("POST", "addfolder.php", true);
@@ -280,5 +291,34 @@ $("#add-folder-button").click( function() {
   req.onload = function() {
     addFolderClose()
     location.reload()
+  }
+})
+
+$(".move-menu-option").click(function() {
+  var newdir = $(this).data("dir")
+  var parent = $(this).text()
+  $("#dir-to-move-to").val( function() {
+    return newdir
+  })
+
+  if ($(this).parent().hasClass("top-level")) {
+    var allmid = document.querySelectorAll(".mid-level > .move-menu-option")
+    allmid.forEach(function(mid) {
+      console.log(mid.dataset.parent,parent)
+      mid.style.display = "none";
+      if (mid.dataset.parent == parent) {
+        mid.style.display = "block"
+      }
+    })
+    $("#levels-container").scrollLeft(256)
+  } else if ($(this).parent().hasClass("mid-level")) {
+    var alllow = document.querySelectorAll(".low-level > .move-menu-option")
+    alllow.forEach(function(low) {
+      low.style.display = "none";
+      if (low.dataset.parent == parent) {
+        low.style.display = "block"
+      }
+    })
+    $("#levels-container").scrollLeft(506)
   }
 })

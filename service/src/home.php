@@ -194,42 +194,61 @@ foreach($topleveldirectories as $folder1) {
     </div>
 
     <div id="move-menu">
-      <div id="more-levels">
-        <div class="top-level move-level">
-          <?php
-          /*$topleveldirectories
-          $midleveldirectories
-          $lowleveldirectories
-          */
-
-          foreach($topleveldirectories as $dir) {
-            $filename = substr($dir, strrpos($dir,"/",-1)+1, strlen($dir));
-            echo "<div class='move-menu-option'>" . $filename . "</div>";
-          }
-
-
-          ?>
+      <div id="move-menu-top">
+        <h3>Select a folder</h3>
+      </div>
+      <div id="levels-container">
+        <div id="more-levels">
+          <div class="top-level move-level">
+            <?php
+            foreach($topleveldirectories as $dir) {
+              $filename = substr($dir, strrpos($dir,"/",-1)+1, strlen($dir));
+              $split = explode("/",$dir);
+              $splitdir = count($split) - 1;
+              $shortdir = "";
+              for ($count = 2; $count <= $splitdir; $count++) {
+                $shortdir = $shortdir . "/" . $split[$count];
+              }
+              echo "<div class='move-menu-option' data-dir='" . $shortdir . "'>" . $filename . "</div>";
+            }
+            ?>
+          </div>
+          <div class="mid-level move-level">
+            <?php
+            foreach($midleveldirectories as $dir) {
+              $filename = substr($dir, strrpos($dir,"/",-1)+1, strlen($dir));
+              $secondslash = strrpos($dir,"/",-strlen($filename)-2);
+              $parent = substr($dir, $secondslash+1, strrpos($dir,"/",-1)-$secondslash-1);
+              $split = explode("/",$dir);
+              $shortdir = "";
+              for ($count = 2; $count <= count($split) - 1; $count++) {
+                $shortdir = $shortdir . "/" . $split[$count];
+              }
+              echo "<div class='move-menu-option' data-dir='" . $shortdir . "' data-parent='" . $parent . "'>" . $filename . "</div>";
+            }
+            ?>
+          </div>
+          <div class="low-level move-level">
+            <?php
+            foreach($lowleveldirectories as $dir) {
+              $filename = substr($dir, strrpos($dir,"/",-1)+1, strlen($dir));
+              $secondslash = strrpos($dir,"/",-strlen($filename)-2);
+              $parent = substr($dir, $secondslash+1, strrpos($dir,"/",-1)-$secondslash-1);
+              $split = explode("/",$dir);
+              $shortdir = "";
+              for ($count = 2; $count <= count($split) - 1; $count++) {
+                $shortdir = $shortdir . "/" . $split[$count];
+              }
+              echo "<div class='move-menu-option' data-dir='" . $shortdir . "' data-parent='" . $parent . "'>" . $filename . "</div>";
+            }
+            ?>
+          </div>
+          <input type="hidden" value="" id="dir-to-move-to"/>
         </div>
-
-        <div class="mid-level move-level">
-          <?php
-          foreach($midleveldirectories as $dir) {
-            $filename = substr($dir, strrpos($dir,"/",-1)+1, strlen($dir));
-            $secondslash = strrpos($dir,"/",-strlen($filename)-2);
-            $parent = substr($dir, $secondslash+1, strrpos($dir,"/",-1)-$secondslash-1);
-            echo "<div class='move-menu-option' data-parent='" . $parent . "'>" . $filename . "</div>";
-          }
-          ?>
-        </div>
-        <!-- undone -->
-        <div class="low-level move-level">
-          <?php
-          foreach($lowleveldirectories as $dir) {
-            $filename = substr($dir, strrpos($dir,"/",-1)+1, strlen($dir));
-            echo "<div class='move-menu-option'>" . $filename . "</div>";
-          }
-          ?>
-        </div>
+      </div>
+      <div id="move-menu-bottom">
+        <button type="button" class="move-menu-button" id="move-menu-back"><</button>
+        <button type="button" class="move-menu-button" id="move-menu-select">Select</button>
       </div>
     </div>
 

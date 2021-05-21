@@ -85,6 +85,15 @@ function fileContextClose() {
   $("#file-context-popup").css("display","none")
 }
 
+function fileMoveOpen() {
+  $("#move-menu").css("display","block")
+}
+
+function fileMoveClose() {
+  $("#move-menu").css("display","none")
+}
+
+
 function listFavs(lst) {
   favlist = favlist.split(",")
   files = document.querySelectorAll(".file")
