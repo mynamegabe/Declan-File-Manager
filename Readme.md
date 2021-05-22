@@ -32,8 +32,8 @@
 #### 4. XXE Prevention
 - Document loading
 
-#### 5. Arbitary File Upload and Access
-- File upload :heavy_check_mark:
+#### 5. Arbitary File Upload and Access Prevention :heavy_check_mark:
+- File upload
 
 #### 6. Local File Inclusion/Traversal Prevention
 - File viewing 
