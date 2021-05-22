@@ -20,7 +20,7 @@ function checkHeight() {
   if (window.innerHeight < 1322) {
     var newheight = String((window.innerHeight - $(".center").height())/2) + "px"
     $(".center").css("padding-top",newheight)
-    console.log(String((window.innerHeight - $(".center").height())/6) + "px");
+    //console.log(String((window.innerHeight - $(".center").height())/6) + "px");
   }
 }
 
@@ -49,7 +49,6 @@ $('.file, .notActive').click(function () {
     title.setAttribute("id", "item-filename");
     title.setAttribute("style", "color:black;margin:10px;margin-left:10px;");
     title.innerText = filename
-    console.log(resp)
     if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
       image = new Image();
         image.src = req.responseText
@@ -116,7 +115,6 @@ $('.context-button').hover(function() {
       title.setAttribute("id", "item-filename");
       title.setAttribute("style", "color:black;margin:10px;margin-left:10px;");
       title.innerText = filename
-      console.log(resp)
       if (resp.endsWith(".jpg") || resp.endsWith(".png")) {
         image = new Image();
           image.src = req.responseText
@@ -171,11 +169,12 @@ $('.file-context-button').click(function ( event ) {
       var query = "currentdirectory=" + document.getElementById("get-directory").value + "&filename=" + document.getElementById("use-filename").innerText
       req.send(query);
       req.onload = function() {
-        console.log(req.responseText)
         if (getCookie("Success")=="True") {
           //alert("File favourited")
+          document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
         } else {
           //alert("Error in file favouriting")
+          document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
         }
         location.reload();
       }
@@ -194,11 +193,12 @@ $('.file-context-button').click(function ( event ) {
       var query = "currentdirectory=" + document.getElementById("get-directory").value + "&filename=" + document.getElementById("use-filename").innerText
       req.send(query);
       req.onload = function() {
-        console.log(req.responseText)
         if (getCookie("Success")=="True") {
           //alert("File favourited")
+          document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
         } else {
           //alert("Error in file favouriting")
+          document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
         }
         location.reload();
       }
@@ -304,7 +304,6 @@ $(".move-menu-option").click(function() {
   if ($(this).parent().hasClass("top-level")) {
     var allmid = document.querySelectorAll(".mid-level > .move-menu-option")
     allmid.forEach(function(mid) {
-      console.log(mid.dataset.parent,parent)
       mid.style.display = "none";
       if (mid.dataset.parent == parent) {
         mid.style.display = "block"
@@ -320,5 +319,32 @@ $(".move-menu-option").click(function() {
       }
     })
     $("#levels-container").scrollLeft(506)
+  }
+})
+
+$("#move-menu-back").click(function() {
+  if ($("#levels-container").scrollLeft()<300) {
+    $("#levels-container").scrollLeft(0)
+  } else if ($("#levels-container").scrollLeft()>300) {
+    $("#levels-container").scrollLeft(256)
+  }
+})
+
+$("#move-menu-select").click(function() {
+  var req = new XMLHttpRequest();
+  req.open("POST", "movefile.php", true);
+  req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  var query = "destination=" + document.getElementById("dir-to-move-to").value + "&currentdirectory=" + document.getElementById("currentdirectory").value + "&filename=" + document.getElementById("use-filename").innerText
+  req.send(query);
+  req.onload = function() {
+    if (getCookie("Success")=="True") {
+      document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    } else {
+      //alert("Error in file moving")
+      alert(req.responseText)
+      document.cookie = "Success= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    }
+    fileMoveClose()
+    location.reload()
   }
 })
