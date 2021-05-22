@@ -13,7 +13,7 @@
 #### 6. File deletion :heavy_check_mark:
 #### 7. File favourites :heavy_check_mark:
 #### 8. File sharing 
-#### 9. File moving 
+#### 9. File moving :heavy_check_mark:
 #### 10. File duplicating :heavy_check_mark:
 #### 11. Storage limitation 
 #### 12. Clean UI(Open to feedback) 
@@ -32,11 +32,11 @@
 #### 4. XXE Prevention
 - Document loading
 
-#### 5. Arbitary File Upload Prevention(File MIME check)
-- File upload
+#### 5. Arbitary File Upload and Access
+- File upload :heavy_check_mark:
 
 #### 6. Local File Inclusion/Traversal Prevention
-- File viewing
+- File viewing 
 
 #### 7. Sensitive Data Exposure
 - Password manager and credit card details for purchase of more storage
