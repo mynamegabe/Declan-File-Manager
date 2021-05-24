@@ -14,9 +14,10 @@
 #### 7. File favourites :heavy_check_mark:
 #### 8. File sharing 
 #### 9. File moving :heavy_check_mark:
-#### 10. File duplicating :heavy_check_mark:
-#### 11. Storage limitation 
-#### 12. Clean UI(Open to feedback) 
+#### 10. File download :heavy_check_mark:
+#### 11. File duplicating :heavy_check_mark:
+#### 12. Storage limitation 
+#### 13. Clean UI(Open to feedback) 
 
 
 ## Security Features
