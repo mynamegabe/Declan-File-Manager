@@ -31,7 +31,12 @@ $("#search-button").click(function() {
 })
 
 $(".folder").click(function() {
-  document.getElementById("get-directory").value="/" + $(this).text()
+  var dir = document.getElementById("currentdirectory").value
+  if (dir == "/") {
+    document.getElementById("get-directory").value = "/" + $(this).text()
+  } else {
+    document.getElementById("get-directory").value = document.getElementById("currentdirectory").value + "/" + $(this).text()
+  }
   $("#file-form").submit();
 })
 
@@ -347,4 +352,9 @@ $("#move-menu-select").click(function() {
     fileMoveClose()
     location.reload()
   }
+})
+
+$("#file-context-download").click(function() {
+  var query = "?currentdirectory=" + document.getElementById("currentdirectory").value + "&filename=" + document.getElementById("use-filename").innerText
+  document.location.href = "downloadfile.php" + query;
 })

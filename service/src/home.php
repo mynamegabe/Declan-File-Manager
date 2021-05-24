@@ -174,6 +174,9 @@ foreach($topleveldirectories as $folder1) {
 
     <div id="file-context-popup">
       <div id="file-context-menu">
+        <div id="file-context-download" class="file-context-option">
+          <img src="static/images/icons/download.png"/>Download
+        </div>
         <div id="file-context-duplicate" class="file-context-option">
           <img src="static/images/icons/duplicate.png"/>Duplicate
         </div>
