@@ -112,6 +112,7 @@ foreach($topleveldirectories as $folder1) {
       <a href="/home.php"><img src="/static/images/icons/binder.png"/></a>
       <a href="/favourites.php"><img src="/static/images/icons/favourite.png"/></a>
       <a href="/home.php"><img src="/static/images/icons/trash-bin.png"/></a>
+      <a href="/shared.php"><img src="/static/images/icons/shared.png"/></a>
     </div>
     <div id="content">
       <?php

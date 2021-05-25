@@ -517,6 +517,11 @@ legend {
 #dir {
   font-weight: 900 !important;
   font-size:30px !important;
+  color:black;
+}
+
+.direct {
+  color:black;
 }
 
 #file-container {

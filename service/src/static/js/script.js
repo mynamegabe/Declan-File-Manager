@@ -358,3 +358,50 @@ $("#file-context-download").click(function() {
   var query = "?currentdirectory=" + document.getElementById("currentdirectory").value + "&filename=" + document.getElementById("use-filename").innerText
   document.location.href = "downloadfile.php" + query;
 })
+
+
+var dirobj = document.getElementById("dir")
+var dirtext = dirobj.innerText
+var count = (dirtext.match(/\//g) || []).length
+var objectlist = []
+$("#dir").empty()
+
+var dirs = dirtext.split('/')
+while (dirs.includes("")) {
+  dirs.splice(dirs.indexOf(""),1)
+}
+
+if (count >= 1 && dirtext.length > 0) {
+  var rootspan = document.createElement("span")
+  rootspan.classList.add('direct')
+  rootspan.innerText="/"
+  $("#dir").append(rootspan)
+
+  var dircount = 0
+  var dirlen = dirs.length
+  dirs.forEach(function(dir){
+    if (dircount != dirlen - 1) {
+      var span = document.createElement("span")
+      span.classList.add('direct')
+      span.innerText=dir
+      $("#dir").append(span)
+      $("#dir").append("/")
+    } else {
+      $("#dir").append(dir)
+    }
+  })
+  //dirobj.removeChild(dirobj.lastChild)
+}
+
+$(".direct").click(function(){
+  var parent = $(this).parent()
+  var children = $(parent).children()
+  var pos = $('.direct').index(this)
+  var dir = ""
+  var len = $(this).text().length
+  for (i=0;i<pos+len;i++) {
+    dir += $(children[i]).text()
+  }
+  document.getElementById("get-directory").value = dir
+  $("#file-form").submit();
+})
